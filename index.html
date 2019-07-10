@@ -12,7 +12,12 @@
 	<card v-for="article in articles" :article="article"></card>
 	<ul class="uk-pagination uk-flex-center uk-margin-large-bottom" uk-margin>
 	    <li><a class="uk-padding-small" href="#" @click.prevent="switchPage(-1)"><span uk-pagination-previous></span></a></li>
-	    <li v-for="num in 5" :class="{'uk-text-bold': page === num}"><a @click.prevent="switchPage(0, num)" class="uk-padding-small" href="#">{{ num }}</a></li>
+	    <li v-for="num in 5" :class="{'uk-text-bold': page === num}" class="uk-visible@s">
+	    	<a @click.prevent="switchPage(0, num)" class="uk-padding-small" href="#">{{ num }}</a>
+	    </li>
+	    <li class="uk-hidden@s uk-flex uk-flex-middle">
+	    	<span class="uk-text-bold">{{ page }}</span>
+	    </li>
 	    <li><a class="uk-padding-small"	 href="#" @click.prevent="switchPage(1)"><span uk-pagination-next></span></a></li>
 	</ul>
 </div>
@@ -20,12 +25,12 @@
 <template id="card">
 	<div class="uk-card uk-card-small uk-card-default uk-margin-bottom">
 	    <div class="uk-card-header">
-	        <div class="uk-flex-middle uk-flex-between" uk-grid>
-	            <h4 class="uk-margin-remove-bottom">
-	            	<div class="uk-label">{{ article.source.name }}</div>
-	            	<a :href="article.url" target="_blank" class="uk-link-text uk-margin-small-left">{{ article.title }}</a>
+	        <div>
+	            <div class="uk-label">{{ article.source.name }}</div>
+	            <div class="uk-text-meta uk-margin-small-left uk-inline-block">{{ date().getFullYear() }} / {{ date().getMonth() + 1 }} / {{ date().getDate() }}</div>
+	            <h4 class="uk-margin-remove-botto uk-margin-top">
+	            	<a :href="article.url" target="_blank" class="uk-link-text uk-margin-small-top uk-display-block">{{ article.title }}</a>
 	        	</h4>
-	            <p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">{{ date().getFullYear() }} / {{ date().getMonth() + 1 }} / {{ date().getDate() }}</time></p>
 	        </div>
 	    </div>
 	    <div class="uk-card-body">
