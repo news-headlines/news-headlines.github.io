@@ -13,11 +13,11 @@
 <div id="app" class="uk-container uk-margin-top">
 	<div class="lds-rolling" v-if="isPreloader"><div></div></div>
 	<div class="uk-flex uk-margin-bottom">
-		<input type="text" class="uk-input" placeholder="Введите текст..." v-model="query" @keydown.enter="getData(); resetPage();">
+		<input type="text" class="uk-input" placeholder="Введите текст..." v-model="query" @keydown.enter="getData">
 		<select class="uk-select uk-form-width-xsmall" v-model="language">
-			<option v-for="lang in languages" :value="lang">{{ lang }}1</option>
+			<option v-for="lang in languages" :value="lang">{{ lang }}</option>
 		</select>
-		<button class="uk-button uk-button-default uk-padding-small uk-padding-remove-top uk-padding-remove-bottom" @click="getData(); resetPage();">
+		<button class="uk-button uk-button-default uk-padding-small uk-padding-remove-top uk-padding-remove-bottom" @click="getData">
 			<img src="images/icon-search.svg">
 		</button>
 	</div>
