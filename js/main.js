@@ -14,8 +14,10 @@ var app = new Vue({
 		query: "",
 		language: "ru",
 		languages: ["ru", "en"],
+		articlesNotFound: false,
 		page: 1,
 		articles: [],
+		isPreloader: true,
 		apikey: "9e55d5d601f04394bd91da411dbdf09e"
 	},
 	computed: {
@@ -25,12 +27,23 @@ var app = new Vue({
 	},
 	methods: {
 		getData() {
+			this.isPreloader = true;
+			this.articles = [];
+			this.articlesNotFound = false;
+
 			fetch(this.url).then(
-				response => response.json()
+					response => response.json()
 				).then(
-				data => {
-					this.articles = data.articles
-				}
+					data => {
+						this.articles = data.articles
+						this.isPreloader = false;
+						
+					}
+				).catch(
+					error => {
+						this.isPreloader = false;
+						this.articlesNotFound = true;
+					}
 				)
 			},
 			switchPage(direction, page) {
@@ -60,5 +73,6 @@ var app = new Vue({
 			if(this.query) {
 				this.getData();
 			}
+			this.isPreloader = false;
 		}
 	})
