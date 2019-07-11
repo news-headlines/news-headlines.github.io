@@ -65,11 +65,12 @@ var app = new Vue({
 			this.page = 1;
 		},
 		getData() {
-			this.isPreloader = true;
-			this.articles = [];
-			this.articlesNotFound = false;
-
-			fetch(this.url).then(
+			if(this.query) {
+				this.isPreloader = true;
+				this.articles = [];
+				this.articlesNotFound = false;
+				
+				fetch(this.url).then(
 					response => response.json()
 				).then(
 					data => {
@@ -83,6 +84,7 @@ var app = new Vue({
 						this.articlesNotFound = true;
 					}
 				)
+			}
 			},
 			switchPage(direction, page) {
 				if(page) {
