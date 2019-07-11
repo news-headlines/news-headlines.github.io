@@ -17,7 +17,7 @@ var card = Vue.component("card", {
 			return new Date(this.article.publishedAt)
 		},
 		getTranslated() {
-			this.isPreloader = true;
+			this.$root.isPreloader = true;
 
 			fetch(this.url).then(
 					response => response.json()
@@ -25,13 +25,11 @@ var card = Vue.component("card", {
 					data => {
 						this.article.title = data.text[0];
 						this.article.description = data.text[1];
-						this.isPreloader = false;
-						console.log(data)
-						
+						this.$root.isPreloader = false;
 					}
 				).catch(
 					error => {
-						this.isPreloader = false;
+						this.$root.isPreloader = false;
 					}
 				)
 		}
