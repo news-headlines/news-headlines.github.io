@@ -13,7 +13,7 @@ var app = new Vue({
 	data: {
 		query: "",
 		language: "ru",
-		languages: ["ru", "en"],
+		
 		page: 1,
 		articles: []
 	},
