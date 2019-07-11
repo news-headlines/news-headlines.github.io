@@ -36,7 +36,8 @@
 </div>
 
 <template id="card">
-	<div class="uk-card uk-card-small uk-card-default uk-margin-bottom">
+	<div class="uk-card uk-card-small uk-card-default uk-margin-bottom uk-relative">
+		<div class="lds-rolling" v-if="isPreloader"><div></div></div>
 	    <div class="uk-card-header">
 	        <div>
 	            <div class="uk-label">{{ article.source.name }}</div>

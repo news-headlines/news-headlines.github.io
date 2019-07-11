@@ -4,7 +4,8 @@ var card = Vue.component("card", {
 		return {
 			apikey: "trnsl.1.1.20190711T181144Z.83f69bf0a5336417.79898776f9154e536e9d2e8db6f863c1e2036bd1",
 			lang: "ru",
-			format: "html"
+			format: "html",
+			isPreloader: false
 		}
 	},
 	computed: {
@@ -17,7 +18,7 @@ var card = Vue.component("card", {
 			return new Date(this.article.publishedAt)
 		},
 		getTranslated() {
-			this.$root.isPreloader = true;
+			this.isPreloader = true;
 
 			fetch(this.url).then(
 					response => response.json()
@@ -25,11 +26,11 @@ var card = Vue.component("card", {
 					data => {
 						this.article.title = data.text[0];
 						this.article.description = data.text[1];
-						this.$root.isPreloader = false;
+						this.isPreloader = false;
 					}
 				).catch(
 					error => {
-						this.$root.isPreloader = false;
+						this.isPreloader = false;
 					}
 				)
 		}
