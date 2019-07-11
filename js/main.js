@@ -56,6 +56,11 @@ var app = new Vue({
 			return `https://newsapi.org/v2/everything?apiKey=${this.apikey}&q=${this.query}&language=${this.language}&page=${this.page}`;
 		}
 	},
+	watch: {
+		query() {
+			this.articlesNotFound = false;
+		}
+	},
 	methods: {
 		resetPage() {
 			this.page = 1;
