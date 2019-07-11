@@ -30,6 +30,7 @@ var app = new Vue({
 			this.isPreloader = true;
 			this.articles = [];
 			this.articlesNotFound = false;
+			this.page = 1;
 
 			fetch(this.url).then(
 					response => response.json()
