@@ -12,6 +12,9 @@
 <div id="app" class="uk-container uk-margin-top">
 	<div class="uk-flex uk-margin-bottom">
 		<input type="text" class="uk-input" placeholder="Введите текст..." v-model="query" @keydown.enter="getData">
+		<select class="uk-select uk-form-width-xsmall" v-model="language">
+			<option v-for="language in languages" :value="language">{{ language }}</option>
+		</select>
 		<button class="uk-button uk-button-default" @click="getData">Поиск</button>
 	</div>
 	<card v-for="article in articles" :article="article"></card>
