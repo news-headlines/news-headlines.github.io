@@ -15,11 +15,12 @@ var app = new Vue({
 		language: "ru",
 		languages: ["ru", "en"],
 		page: 1,
-		articles: []
+		articles: [],
+		apikey: "9e55d5d601f04394bd91da411dbdf09e"
 	},
 	computed: {
 		url() {
-			return `https://newsapi.org/v2/everything?apiKey=9e55d5d601f04394bd91da411dbdf09e&q=${this.query}&language=${this.language}&page=${this.page}`;
+			return `https://newsapi.org/v2/everything?apiKey=${this.apikey}&q=${this.query}&language=${this.language}&page=${this.page}`;
 		}
 	},
 	methods: {
