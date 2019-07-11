@@ -13,7 +13,7 @@
 	<div class="uk-flex uk-margin-bottom">
 		<input type="text" class="uk-input" placeholder="Введите текст..." v-model="query" @keydown.enter="getData">
 		<select class="uk-select uk-form-width-xsmall" v-model="language">
-			<option v-for="language in languages" :value="language">{{ language }}</option>
+			<option v-for="lang in languages" :value="lang">{{ lang }}</option>
 		</select>
 		<button class="uk-button uk-button-default" @click="getData">Поиск</button>
 	</div>
