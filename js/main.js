@@ -61,10 +61,11 @@ var app = new Vue({
 		}
 	},
 	methods: {
-		resetPage() {
-			this.page = 1;
-		},
-		getData() {
+		getData(value) {
+			if(value == "resetPage") {
+				this.page = 1;
+			}
+
 			if(this.query) {
 				this.isPreloader = true;
 				this.articles = [];
