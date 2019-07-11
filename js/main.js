@@ -11,10 +11,10 @@ var card = Vue.component("card", {
 var app = new Vue({
 	el: "#app",
 	data: {
-		query: "javascript",
+		query: "",
 		language: "ru",
 		page: 1,
-		articles: null
+		articles: []
 	},
 	computed: {
 		url() {
@@ -55,6 +55,8 @@ var app = new Vue({
 			}
 		},
 		created() {
-			this.getData();
+			if(this.query) {
+				this.getData();
+			}
 		}
 	})

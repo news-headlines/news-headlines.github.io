@@ -3,14 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="css/uikit.min.css">
 	<title>newsapi</title>
 </head>
 <body style="min-width: 320px;">
 
 <div id="app" class="uk-container uk-margin-top">
+	<div class="uk-flex uk-margin-bottom">
+		<input type="text" class="uk-input" placeholder="Введите текст..." v-model="query" @keydown.enter="getData">
+		<button class="uk-button uk-button-default" @click="getData">Поиск</button>
+	</div>
 	<card v-for="article in articles" :article="article"></card>
-	<ul class="uk-pagination uk-flex-center uk-margin-large-bottom" uk-margin>
+	<ul class="uk-pagination uk-flex-center uk-margin-large-bottom" uk-margin v-if="articles.length">
 	    <li><a class="uk-padding-small" href="#" @click.prevent="switchPage(-1)"><span uk-pagination-previous></span></a></li>
 	    <li v-for="num in 5" :class="{'uk-text-bold': page === num}" class="uk-visible@s">
 	    	<a @click.prevent="switchPage(0, num)" class="uk-padding-small" href="#">{{ num }}</a>
@@ -43,6 +48,5 @@
 <script src="js/vue.min.js"></script>
 <script src="js/uikit.min.js"></script>
 <script src="js/main.js"></script>
-
 </body>
 </html>
