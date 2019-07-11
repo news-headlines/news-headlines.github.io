@@ -5,67 +5,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="css/uikit.min.css">
-	<title>newsapi</title>
+	<link rel="stylesheet" href="css/style.css">
+	<title>News headlines</title>
 </head>
-<style>
-	body {
-		min-width: 320px;
-	}
-	/* LDS-ROLLING */
-
-	@keyframes lds-rolling {
-	  0% {
-	    transform: scale(.5) rotate(0deg);
-	  }
-	  100% {
-	    transform: scale(.5) rotate(360deg);
-	  }
-	}
-	.lds-rolling div,
-	.lds-rolling div:after {
-	  position: absolute;
-	  width: 160px;
-	  height: 160px;
-	  border: 10px solid #1e87f0;
-	  border-top-color: transparent;
-	  border-radius: 50%;
-	}
-	.lds-rolling div {
-	  animation: lds-rolling 1s linear infinite;
-	  top: 0;
-	  left: 0;
-	  right: 0;
-	  bottom: 0;
-	  margin: auto;
-	  transform: scale(.5);
-	}
-	.lds-rolling div:after {
-	  -webkit-transform: rotate(90deg);
-	  transform: rotate(90deg);
-	}
-	.lds-rolling {
-	  background: rgba(255,255,255,.75);
-	  width: 100%;
-	  height: 100%;
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  z-index: 10;
-	}
-
-	/* /LDS-ROLLING */
-</style>
 <body>
-
 
 <div id="app" class="uk-container uk-margin-top">
 	<div class="lds-rolling" v-if="isPreloader"><div></div></div>
 	<div class="uk-flex uk-margin-bottom">
-		<input type="text" class="uk-input" placeholder="Введите текст..." v-model="query" @keydown.enter="getData">
+		<input type="text" class="uk-input" placeholder="Введите текст..." v-model="query" @keydown.enter="getData(); resetPage();">
 		<select class="uk-select uk-form-width-xsmall" v-model="language">
 			<option v-for="lang in languages" :value="lang">{{ lang }}</option>
 		</select>
-		<button class="uk-button uk-button-default uk-padding-small uk-padding-remove-top uk-padding-remove-bottom" @click="getData">
+		<button class="uk-button uk-button-default uk-padding-small uk-padding-remove-top uk-padding-remove-bottom" @click="getData(); resetPage();">
 			<img src="images/icon-search.svg">
 		</button>
 	</div>
@@ -96,7 +48,10 @@
 	    </div>
 	    <div class="uk-card-body">
 	        <p v-html="article.description"></p>
-	        <a :href="article.url" target="_blank" class="uk-button uk-button-text">Читать далее</a>
+	        <div class="uk-flex uk-flex-between">
+	        	<a :href="article.url" target="_blank" class="uk-button uk-button-text">Читать далее</a>
+	        	<div class="uk-button uk-button-text" @click="getTranslated">Перевести</div>
+	        </div>
 	    </div>
 	</div>
 </template>

@@ -1,8 +1,39 @@
 var card = Vue.component("card", {
 	props: ["article"],
+	data() {
+		return {
+			apikey: "trnsl.1.1.20190711T181144Z.83f69bf0a5336417.79898776f9154e536e9d2e8db6f863c1e2036bd1",
+			lang: "ru",
+			format: "html"
+		}
+	},
+	computed: {
+		url() {
+			return `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${this.apikey}&format=${this.format}&lang=${this.lang}&text=${this.article.title}&text=${this.article.description}`
+		}
+	},
 	methods: {
 		date() {
 			return new Date(this.article.publishedAt)
+		},
+		getTranslated() {
+			this.isPreloader = true;
+
+			fetch(this.url).then(
+					response => response.json()
+				).then(
+					data => {
+						this.article.title = data.text[0];
+						this.article.description = data.text[1];
+						this.isPreloader = false;
+						console.log(data)
+						
+					}
+				).catch(
+					error => {
+						this.isPreloader = false;
+					}
+				)
 		}
 	},
 	template: "#card"
@@ -13,7 +44,7 @@ var app = new Vue({
 	data: {
 		query: "",
 		language: "ru",
-		languages: ["ru", "en"],
+		languages: ["ru", "en", "ar", "de", "es", "fr", "he" ,"it" ,"nl" ,"no" ,"pt" ,"se", "ud", "zh"],
 		articlesNotFound: false,
 		page: 1,
 		articles: [],
@@ -26,11 +57,13 @@ var app = new Vue({
 		}
 	},
 	methods: {
+		resetPage() {
+			this.page = 1;
+		},
 		getData() {
 			this.isPreloader = true;
 			this.articles = [];
 			this.articlesNotFound = false;
-			this.page = 1;
 
 			fetch(this.url).then(
 					response => response.json()
