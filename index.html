@@ -15,7 +15,7 @@
 	<div class="uk-flex uk-margin-bottom">
 		<input type="text" class="uk-input" placeholder="Поиск новостей..." v-model="query" @keydown.enter="getData('resetPage')">
 		<select class="uk-select uk-form-width-xsmall" v-model="language">
-			<option v-for="lang in languages" :value="lang">{{ lang }}</option>
+			<option v-for="(short, full) in languages" :value="short">{{ full }}</option>
 		</select>
 		<button class="uk-button uk-button-default uk-padding-small uk-padding-remove-top uk-padding-remove-bottom" @click="getData('resetPage')">
 			<img src="images/icon-search.svg">

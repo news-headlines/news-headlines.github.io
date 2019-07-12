@@ -1,3 +1,19 @@
+var languages =  {
+	"Russian": "ru",
+	"English": "en",
+	"Arabic": "ar",
+	"German": "de",
+	"Spanish": "es",
+	"French": "fr",
+	"Hebrew": "he",
+	"Italian": "it",
+	"Dutch": "nl",
+	"Norwegian": "no",
+	"Portuguese": "pt",
+	"Northern Sami": "se",
+	"Chinese": "zh"
+}
+
 var card = Vue.component("card", {
 	props: ["article"],
 	data() {
@@ -43,7 +59,7 @@ var app = new Vue({
 	data: {
 		query: "",
 		language: "ru",
-		languages: ["ru", "en", "ar", "de", "es", "fr", "he" ,"it" ,"nl" ,"no" ,"pt" ,"se", "ud", "zh"],
+		languages: languages,
 		articlesNotFound: false,
 		articlesCount: null,
 		page: 1,
@@ -89,9 +105,7 @@ var app = new Vue({
 					data => {
 						this.articles = data.articles
 						this.articlesCount = data.totalResults;
-						this.isPreloader = false;
-						console.log(data)
-						
+						this.isPreloader = false;						
 					}
 				).catch(
 					error => {
