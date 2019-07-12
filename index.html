@@ -25,11 +25,11 @@
 	<card v-for="article in articles" :article="article"></card>
 	<ul class="uk-pagination uk-flex-center uk-margin-large-bottom" uk-margin v-if="articles.length">
 	    <li><a class="uk-padding-small" href="#" @click.prevent="switchPage(-1)"><span uk-pagination-previous></span></a></li>
-	    <li v-for="num in 5" :class="{'uk-text-bold': page === num}" class="uk-visible@s">
+	    <li v-for="num in getCountPage()" :class="{'uk-text-bold': page === num}" class="uk-visible@s">
 	    	<a @click.prevent="switchPage(0, num)" class="uk-padding-small" href="#">{{ num }}</a>
 	    </li>
 	    <li class="uk-hidden@s uk-flex uk-flex-middle">
-	    	<span class="uk-text-bold">{{ page }}</span>
+	    	<span>{{ page }} из {{ getCountPage() }}</span>
 	    </li>
 	    <li><a class="uk-padding-small"	 href="#" @click.prevent="switchPage(1)"><span uk-pagination-next></span></a></li>
 	</ul>

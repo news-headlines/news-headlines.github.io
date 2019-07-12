@@ -45,6 +45,7 @@ var app = new Vue({
 		language: "ru",
 		languages: ["ru", "en", "ar", "de", "es", "fr", "he" ,"it" ,"nl" ,"no" ,"pt" ,"se", "ud", "zh"],
 		articlesNotFound: false,
+		articlesCount: null,
 		page: 1,
 		articles: [],
 		isPreloader: true,
@@ -61,6 +62,17 @@ var app = new Vue({
 		}
 	},
 	methods: {
+		getCountPage() {
+			if(this.articlesCount <= 100) {
+				if(this.articlesCount <= 20) {
+					return 1;
+				} else {
+					return Math.floor(this.articlesCount / 20);
+				}
+			} else {
+				return 5;
+			}
+		},
 		getData(value) {
 			if(value == "resetPage") {
 				this.page = 1;
@@ -76,7 +88,9 @@ var app = new Vue({
 				).then(
 					data => {
 						this.articles = data.articles
+						this.articlesCount = data.totalResults;
 						this.isPreloader = false;
+						console.log(data)
 						
 					}
 				).catch(
@@ -88,6 +102,8 @@ var app = new Vue({
 			}
 			},
 			switchPage(direction, page) {
+				var maxPage = this.getCountPage();
+
 				if(page) {
 					this.page = page;
 					this.getData();
@@ -102,8 +118,8 @@ var app = new Vue({
 					return false;
 				}
 
-				if(this.page > 5) {
-					this.page = 5;
+				if(this.page > maxPage) {
+					this.page = maxPage;
 					return false;
 				}
 
